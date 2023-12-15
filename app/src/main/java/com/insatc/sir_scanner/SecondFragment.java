@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.insatc.sir_scanner.databinding.FragmentSecondBinding;
+import com.insatc.sir_scanner.network.CellData;
 
 public class SecondFragment extends Fragment {
 
@@ -40,7 +41,8 @@ public class SecondFragment extends Fragment {
         binding.dataDispButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CellData.getCellData(getActivity());
+                String info = CellData.getCellData(getActivity());
+                binding.cellInfoTextView.setText(info);
             }
         });
     }

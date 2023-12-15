@@ -9,7 +9,10 @@
 
     <string name="lorem_ipsum">
         Premier essai à une application affichant l\'état RRC et la station de base.
-        Pour l\'instant : seulement LTE, affiche PCI et le MCC (marche que pour la cell associée)
-        Bouton à la page suivante.
+        Pour l\'instant : liste des cellules détectées dans la technologie du tel au moment
+        de la recherche.
+        \nPour l\'instant affiche brutement l\'identité de la cellule, sans traitement
+        pour afficher correctement l\'hexadécimal etc.
+        \nBouton à la page suivante.
     </string>
 </resources>
