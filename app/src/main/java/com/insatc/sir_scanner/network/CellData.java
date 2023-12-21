@@ -8,13 +8,14 @@ import android.telephony.CellInfoGsm;
 import android.telephony.CellIdentityLte;
 import android.telephony.CellIdentityWcdma;
 import android.telephony.CellIdentityGsm;
+import android.telephony.CellSignalStrengthLte;
+import android.telephony.CellSignalStrengthWcdma;
+import android.telephony.CellSignalStrengthGsm;
 import android.telephony.TelephonyManager;
-import android.widget.Toast;
 public class CellData {
     public static String getCellData(Context context) {
-        String infoLTE = "Aucun";
-        String infoWCDMA = "Aucun";
-        String infoGSM = "Aucun";
+        String texte = "Aucun";
+        String technologie = "";
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
         boolean conditionPermission = context.checkSelfPermission(
@@ -26,37 +27,72 @@ public class CellData {
                 if (cellInfo instanceof CellInfoLte) {
                     CellInfoLte cellInfoLte = (CellInfoLte) cellInfo;
                     CellIdentityLte cellIdentityLte = cellInfoLte.getCellIdentity();
-                    if(infoLTE == "Aucun") {
-                        infoLTE = cellIdentityLte.toString();
+                    CellSignalStrengthLte cellSignalLte = cellInfoLte.getCellSignalStrength();
+
+                    String PCI = "PCI : "+cellIdentityLte.getPci()+"\n";
+                    String CI = "CI : "+cellIdentityLte.getCi()+"\n";
+                    String MCC = "MCC : "+cellIdentityLte.getMcc()+"\n";
+                    String MNC = "MNC : "+cellIdentityLte.getMnc()+"\n";
+                    String EARFCN = "EARFCN :"+cellIdentityLte.getEarfcn()+"\n";
+                    String TAC = "TAC : "+cellIdentityLte.getTac()+"\n";
+                    String puissance = "Puissance (en dBm) : "+cellSignalLte.getDbm()+"\n";
+
+                    String cellInfoTexteLte = PCI+CI+MCC+MNC+EARFCN+TAC+puissance+"\n\n\n";
+
+                    if(texte.equals("Aucun")) {
+                        texte = cellInfoTexteLte;
+                        technologie += "4G ";
                     } else {
-                        infoLTE += "\n\n"+cellIdentityLte.toString();
+                        texte += "\n\n"+cellInfoTexteLte;
                     }
 
                 } else if (cellInfo instanceof CellInfoWcdma){
                     CellInfoWcdma cellInfoWcdma = (CellInfoWcdma) cellInfo;
                     CellIdentityWcdma cellIdentityWcdma = cellInfoWcdma.getCellIdentity();
-                    if(infoWCDMA == "Aucun") {
-                        infoWCDMA = cellIdentityWcdma.toString();
+                    CellSignalStrengthWcdma cellSignalWcdma = cellInfoWcdma.getCellSignalStrength();
+
+                    String CID = "CID : "+cellIdentityWcdma.getCid()+"\n";
+                    String MCC = "MCC : "+cellIdentityWcdma.getMcc()+"\n";
+                    String MNC = "MNC : "+cellIdentityWcdma.getMnc()+"\n";
+                    String UARFCN = "UARFCN :"+cellIdentityWcdma.getUarfcn()+"\n";
+                    String LAC = "LAC : "+cellIdentityWcdma.getLac()+"\n";
+                    String puissance = "Puissance (en dBm) : "+cellSignalWcdma.getDbm()+"\n";
+
+                    String cellInfoTexteWcdma = CID+MCC+MNC+UARFCN+LAC+puissance+"\n\n\n";
+
+                    if(texte.equals("Aucun")) {
+                        texte = cellInfoTexteWcdma;
+                        technologie += "3G ";
                     } else {
-                        infoWCDMA += "\n\n"+cellIdentityWcdma.toString();
+                        texte += "\n\n"+cellInfoTexteWcdma;
                     }
 
                 } else if (cellInfo instanceof CellInfoGsm){
                     CellInfoGsm cellInfoGsm = (CellInfoGsm) cellInfo;
                     CellIdentityGsm cellIdentityGsm = cellInfoGsm.getCellIdentity();
-                    if(infoGSM == "Aucun") {
-                        infoGSM = cellIdentityGsm.toString();
+                    CellSignalStrengthGsm cellSignalGsm = cellInfoGsm.getCellSignalStrength();
+
+                    String CID = "CID : "+cellIdentityGsm.getCid()+"\n";
+                    String BSID = "BSID : "+cellIdentityGsm.getBsic()+"\n";
+                    String MCC = "MCC : "+cellIdentityGsm.getMcc()+"\n";
+                    String MNC = "MNC : "+cellIdentityGsm.getMnc()+"\n";
+                    String ARFCN = "ARFCN :"+cellIdentityGsm.getArfcn()+"\n";
+                    String LAC = "LAC : "+cellIdentityGsm.getLac()+"\n";
+                    String puissance = "Puissance (en dBm) : "+cellSignalGsm.getDbm()+"\n";
+
+                    String cellInfoTexteGsm = CID+BSID+MCC+MNC+ARFCN+LAC+puissance+"\n\n\n";
+
+                    if(texte.equals("Aucun")) {
+                        texte = cellInfoTexteGsm;
+                        technologie += "2G ";
                     } else {
-                        infoGSM += "\n\n"+cellIdentityGsm.toString();
+                        texte += "\n\n"+cellInfoTexteGsm;
                     }
 
                 }
             }
         }
 
-        //Très brouillon et en plus, je crois qu'on ne peut avoir qu'une technologie à la fois donc
-        //ça ne sert à rien de faire comme ça. C'est juste temporaire (même le code au dessus)
-        return ("4G:\n\n"+infoLTE+"\n\n\n\n"+"3G:\n\n"+infoWCDMA+"\n\n\n\n"+
-                "2G:\n\n"+infoGSM);
+        return ("Technologie : "+technologie+"\n\n\n\n"+"Cellules :\n\n"+texte);
     }
 }
