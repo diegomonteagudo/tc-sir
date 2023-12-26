@@ -31,8 +31,8 @@ public class CellData {
 
                     String PCI = "PCI : "+cellIdentityLte.getPci()+"\n";
                     String CI = "CI : "+cellIdentityLte.getCi()+"\n";
-                    String MCC = "MCC : "+cellIdentityLte.getMcc()+"\n";
-                    String MNC = "MNC : "+cellIdentityLte.getMnc()+"\n";
+                    String MCC = "MCC : "+cellIdentityLte.getMccString()+"\n";
+                    String MNC = "MNC : "+cellIdentityLte.getMncString()+"\n";
                     String EARFCN = "EARFCN :"+cellIdentityLte.getEarfcn()+"\n";
                     String TAC = "TAC : "+cellIdentityLte.getTac()+"\n";
                     String puissance = "Puissance (en dBm) : "+cellSignalLte.getDbm()+"\n";
@@ -52,8 +52,8 @@ public class CellData {
                     CellSignalStrengthWcdma cellSignalWcdma = cellInfoWcdma.getCellSignalStrength();
 
                     String CID = "CID : "+cellIdentityWcdma.getCid()+"\n";
-                    String MCC = "MCC : "+cellIdentityWcdma.getMcc()+"\n";
-                    String MNC = "MNC : "+cellIdentityWcdma.getMnc()+"\n";
+                    String MCC = "MCC : "+cellIdentityWcdma.getMccString()+"\n";
+                    String MNC = "MNC : "+cellIdentityWcdma.getMncString()+"\n";
                     String UARFCN = "UARFCN :"+cellIdentityWcdma.getUarfcn()+"\n";
                     String LAC = "LAC : "+cellIdentityWcdma.getLac()+"\n";
                     String puissance = "Puissance (en dBm) : "+cellSignalWcdma.getDbm()+"\n";
@@ -74,8 +74,8 @@ public class CellData {
 
                     String CID = "CID : "+cellIdentityGsm.getCid()+"\n";
                     String BSID = "BSID : "+cellIdentityGsm.getBsic()+"\n";
-                    String MCC = "MCC : "+cellIdentityGsm.getMcc()+"\n";
-                    String MNC = "MNC : "+cellIdentityGsm.getMnc()+"\n";
+                    String MCC = "MCC : "+cellIdentityGsm.getMccString()+"\n";
+                    String MNC = "MNC : "+cellIdentityGsm.getMncString()+"\n";
                     String ARFCN = "ARFCN :"+cellIdentityGsm.getArfcn()+"\n";
                     String LAC = "LAC : "+cellIdentityGsm.getLac()+"\n";
                     String puissance = "Puissance (en dBm) : "+cellSignalGsm.getDbm()+"\n";
