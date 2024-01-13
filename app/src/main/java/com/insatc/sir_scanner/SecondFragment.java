@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.insatc.sir_scanner.databinding.FragmentSecondBinding;
 import com.insatc.sir_scanner.network.CellData;
+import com.insatc.sir_scanner.network.InternetTraffic;
 
 public class SecondFragment extends Fragment {
 
@@ -43,6 +44,13 @@ public class SecondFragment extends Fragment {
             public void onClick(View view) {
                 String info = CellData.getCellData(getActivity());
                 binding.cellInfoTextView.setText(info);
+            }
+        });
+
+        binding.connectionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InternetTraffic.generateTraffic(getActivity(), binding.connectionButton);
             }
         });
     }
