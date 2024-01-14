@@ -1,6 +1,7 @@
 package com.insatc.sir_scanner.network;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoLte;
 import android.telephony.CellInfoWcdma;
@@ -17,15 +18,18 @@ import java.util.List;
 
 public class CellData {
     public static String getCellData(Context context) {
-        String texte = "Aucun";
+        String texteFinal = "Aucun";
         String technologie = "";
+        String essaiRRC = "Inconnu";
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         boolean conditionPermission = context.checkSelfPermission(
                 android.Manifest.permission.READ_PHONE_STATE)
                 == android.content.pm.PackageManager.PERMISSION_GRANTED;
 
         if(conditionPermission) {
+            essaiRRC = connectivityManager.isDefaultNetworkActive()?"Probablement CONNECTED":"IDLE";
             List<CellInfo> allCellInfo = telephonyManager.getAllCellInfo();
             //CellInfo firstCell = allCellInfo.get(0);
             for (CellInfo cellInfo : allCellInfo) {
@@ -34,21 +38,20 @@ public class CellData {
                     CellIdentityLte cellIdentityLte = cellInfoLte.getCellIdentity();
                     CellSignalStrengthLte cellSignalLte = cellInfoLte.getCellSignalStrength();
 
-                    String PCI = "PCI : " + cellIdentityLte.getPci() + "\n";
-                    String CI = "CI : " + cellIdentityLte.getCi() + "\n";
-                    String MCC = "MCC : " + cellIdentityLte.getMccString() + "\n";
-                    String MNC = "MNC : " + cellIdentityLte.getMncString() + "\n";
-                    String EARFCN = "EARFCN :" + cellIdentityLte.getEarfcn() + "\n";
-                    String TAC = "TAC : " + cellIdentityLte.getTac() + "\n";
-                    String puissance = "Puissance (en dBm) : " + cellSignalLte.getDbm() + "\n";
+                    StringBuilder res = new StringBuilder();
+                    res.append(appendIfDefined("PCI", cellIdentityLte.getPci()));
+                    res.append(appendIfDefined("CI", cellIdentityLte.getCi()));
+                    res.append(appendIfDefined("MCC", cellIdentityLte.getMccString()));
+                    res.append(appendIfDefined("MNC", cellIdentityLte.getMncString()));
+                    res.append(appendIfDefined("EARFCN", cellIdentityLte.getEarfcn()));
+                    res.append(appendIfDefined("TAC", cellIdentityLte.getTac()));
+                    res.append(appendIfDefined("Puissance (en dBm)", cellSignalLte.getDbm()));
 
-                    String cellInfoTexteLte = PCI + CI + MCC + MNC + EARFCN + TAC + puissance + "\n\n\n";
-
-                    if (texte.equals("Aucun")) {
-                        texte = cellInfoTexteLte;
+                    if (texteFinal.equals("Aucun")) {
+                        texteFinal = res.toString();
                         technologie += "4G ";
                     } else {
-                        texte += "\n\n" + cellInfoTexteLte;
+                        texteFinal += "\n\n" + res.toString();
                     }
 
                 } else if (cellInfo instanceof CellInfoWcdma) {
@@ -56,20 +59,19 @@ public class CellData {
                     CellIdentityWcdma cellIdentityWcdma = cellInfoWcdma.getCellIdentity();
                     CellSignalStrengthWcdma cellSignalWcdma = cellInfoWcdma.getCellSignalStrength();
 
-                    String CID = "CID : " + cellIdentityWcdma.getCid() + "\n";
-                    String MCC = "MCC : " + cellIdentityWcdma.getMccString() + "\n";
-                    String MNC = "MNC : " + cellIdentityWcdma.getMncString() + "\n";
-                    String UARFCN = "UARFCN :" + cellIdentityWcdma.getUarfcn() + "\n";
-                    String LAC = "LAC : " + cellIdentityWcdma.getLac() + "\n";
-                    String puissance = "Puissance (en dBm) : " + cellSignalWcdma.getDbm() + "\n";
+                    StringBuilder res = new StringBuilder();
+                    res.append(appendIfDefined("CID : ", cellIdentityWcdma.getCid()));
+                    res.append(appendIfDefined("MCC : ", cellIdentityWcdma.getMccString()));
+                    res.append(appendIfDefined("MNC : ", cellIdentityWcdma.getMncString()));
+                    res.append(appendIfDefined("UARFCN : ", cellIdentityWcdma.getUarfcn()));
+                    res.append(appendIfDefined("LAC : ", cellIdentityWcdma.getLac()));
+                    res.append(appendIfDefined("Puissance (en dBm) : ", cellSignalWcdma.getDbm()));
 
-                    String cellInfoTexteWcdma = CID + MCC + MNC + UARFCN + LAC + puissance + "\n\n\n";
-
-                    if (texte.equals("Aucun")) {
-                        texte = cellInfoTexteWcdma;
+                    if (texteFinal.equals("Aucun")) {
+                        texteFinal = res.toString();
                         technologie += "3G ";
                     } else {
-                        texte += "\n\n" + cellInfoTexteWcdma;
+                        texteFinal += "\n\n" + res.toString();
                     }
 
                 } else if (cellInfo instanceof CellInfoGsm) {
@@ -77,28 +79,40 @@ public class CellData {
                     CellIdentityGsm cellIdentityGsm = cellInfoGsm.getCellIdentity();
                     CellSignalStrengthGsm cellSignalGsm = cellInfoGsm.getCellSignalStrength();
 
-                    String CID = "CID : " + cellIdentityGsm.getCid() + "\n";
-                    String BSID = "BSID : " + cellIdentityGsm.getBsic() + "\n";
-                    String MCC = "MCC : " + cellIdentityGsm.getMccString() + "\n";
-                    String MNC = "MNC : " + cellIdentityGsm.getMncString() + "\n";
-                    String ARFCN = "ARFCN :" + cellIdentityGsm.getArfcn() + "\n";
-                    String LAC = "LAC : " + cellIdentityGsm.getLac() + "\n";
-                    String puissance = "Puissance (en dBm) : " + cellSignalGsm.getDbm() + "\n";
+                    StringBuilder res = new StringBuilder();
+                    res.append(appendIfDefined("CID : ", cellIdentityGsm.getCid()));
+                    res.append(appendIfDefined("BSID : ", cellIdentityGsm.getBsic()));
+                    res.append(appendIfDefined("MCC : ", cellIdentityGsm.getMccString()));
+                    res.append(appendIfDefined("MNC : ", cellIdentityGsm.getMncString()));
+                    res.append(appendIfDefined("ARFCN : ", cellIdentityGsm.getArfcn()));
+                    res.append(appendIfDefined("LAC : ", cellIdentityGsm.getLac()));
+                    res.append(appendIfDefined("Puissance (en dBm) : ", cellSignalGsm.getDbm()));
 
-                    String cellInfoTexteGsm = CID + BSID + MCC + MNC + ARFCN + LAC + puissance + "\n\n\n";
-
-                    if (texte.equals("Aucun")) {
-                        texte = cellInfoTexteGsm;
+                    if (texteFinal.equals("Aucun")) {
+                        texteFinal = res.toString();
                         technologie += "2G ";
                     } else {
-                        texte += "\n\n" + cellInfoTexteGsm;
+                        texteFinal += "\n\n" + res.toString();
                     }
 
                 }
             }
-            return ("Technologie : " + technologie + "\n\n\n\n" + "Cellule :\n\n" + texte);
+            return ("Etat RRC : "+essaiRRC+"\n\n"
+                    +"Technologie : " + technologie + "\n\n\n\n"
+                    + "Cellules :\n\n" + texteFinal);
         } else {
             return ("Erreur: permissions non accordées");
         }
+    }
+
+    public static String appendIfDefined(String label, String value) {
+        if (value != null && !value.equals(String.valueOf(Integer.MAX_VALUE))) {
+            return label + " : " + value + "\n";
+        }
+        return "";
+    }
+
+    public static String appendIfDefined(String label, int value) {
+        return appendIfDefined(label, Integer.toString(value));
     }
 }
