@@ -2,6 +2,7 @@ package com.insatc.sir_scanner.network;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.os.Looper;
 import android.telephony.CellInfo;
 import android.telephony.CellInfoLte;
 import android.telephony.CellInfoWcdma;
@@ -13,11 +14,51 @@ import android.telephony.CellSignalStrengthLte;
 import android.telephony.CellSignalStrengthWcdma;
 import android.telephony.CellSignalStrengthGsm;
 import android.telephony.TelephonyManager;
+import android.widget.Button;
+import android.widget.TextView;
+import android.os.Handler;
+import android.os.Looper;
 
 import java.util.List;
 
-public class CellData {
-    public static String getCellData(Context context) {
+public class CellData implements Runnable {
+    private boolean isRunning = false;
+    private Context context;
+    private Button toggleScanButton;
+    private TextView displayTextView;
+
+    private Handler uiInteraction = new Handler(Looper.getMainLooper());
+
+    public CellData(Context context, Button toggleScanButton, TextView displayTextView){
+        this.context = context;
+        this.toggleScanButton = toggleScanButton;
+        this.displayTextView = displayTextView;
+    }
+
+    @Override
+    public void run() {
+        isRunning = true;
+        TextView textDisp = this.displayTextView;
+        changerTexteBouton("Désactiver scan", this.toggleScanButton);
+        while(isRunning){
+            String texte = getCellData(this.context);
+            changerTexteTextview(texte, this.displayTextView);
+            try {
+                Thread.sleep(100); //rafraichissement pour l'instant codé en dur
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void endScan(){
+        if(isRunning){
+            isRunning = false;
+            changerTexteBouton("Activer scan", this.toggleScanButton);
+        }
+    }
+
+    public String getCellData(Context context) {
         String texteFinal = "Aucun";
         String technologie = "";
         String essaiRRC = "Inconnu";
@@ -97,22 +138,40 @@ public class CellData {
 
                 }
             }
-            return ("Etat RRC : "+essaiRRC+"\n\n"
-                    +"Technologie : " + technologie + "\n\n\n\n"
+            return ("Etat RRC : "+"\n"+essaiRRC+"\n\n"
+                    +"Technologie : " + "\n" + technologie + "\n\n\n\n"
                     + "Cellules :\n\n" + texteFinal);
         } else {
             return ("Erreur: permissions non accordées");
         }
     }
 
-    public static String appendIfDefined(String label, String value) {
+    public String appendIfDefined(String label, String value) {
         if (value != null && !value.equals(String.valueOf(Integer.MAX_VALUE))) {
             return label + " : " + value + "\n";
         }
         return "";
     }
 
-    public static String appendIfDefined(String label, int value) {
+    public String appendIfDefined(String label, int value) {
         return appendIfDefined(label, Integer.toString(value));
+    }
+
+    public void changerTexteBouton(String texte, Button bouton){
+        this.uiInteraction.post(new Runnable() {
+            @Override
+            public void run() {
+                bouton.setText(texte);
+            }
+        });
+    }
+
+    public void changerTexteTextview(String texte, TextView textView){
+        this.uiInteraction.post(new Runnable() {
+            @Override
+            public void run() {
+                textView.setText(texte);
+            }
+        });
     }
 }

@@ -16,6 +16,8 @@ import com.insatc.sir_scanner.network.InternetTraffic;
 public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
+    private CellData scan;
+    private boolean scanRunning = false;
 
     @Override
     public View onCreateView(
@@ -31,6 +33,8 @@ public class SecondFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        scan =  new CellData(getActivity(), binding.dataDispButton, binding.cellInfoTextView);
+
         binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,8 +46,14 @@ public class SecondFragment extends Fragment {
         binding.dataDispButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String info = CellData.getCellData(getActivity());
-                binding.cellInfoTextView.setText(info);
+                if(!scanRunning){
+                    scanRunning = true;
+                    Thread scanThread = new Thread(scan);
+                    scanThread.start();
+                } else {
+                    scanRunning = false;
+                    scan.endScan();
+                }
             }
         });
 
