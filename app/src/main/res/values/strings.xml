@@ -1,16 +1,14 @@
 <resources>
-    <string name="app_name">sir_scanner</string>
+    <string name="app_name">SIR Scanner</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">Explication</string>
-    <string name="second_fragment_label">Scanner</string>
+    <string name="first_fragment_label">Bienvenue</string>
+    <string name="second_fragment_label">Ajustement des paramètres</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
     <string name="lorem_ipsum">
-        Premier essai à une application affichant l\'état RRC et la station de base.
-        Pour l\'instant : liste des cellules détectées dans la technologie du tel au moment
-        de la recherche. Affiche quelques identifiants seulement.
-        \nBouton à la page suivante.
+        Example text
     </string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>
