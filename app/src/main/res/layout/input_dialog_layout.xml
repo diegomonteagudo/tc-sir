@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Ajoutez ici d'autres vues nécessaires pour la boîte de dialogue -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nom de l'enregistrement"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/recordingNameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Aucun = par défaut (avec date et heure)" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Durée de l'enregistrement (secondes)"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/recordingTimeInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Aucun = arrêt manuel" />
+
+    <!-- Ajoutez d'autres vues au besoin -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Intervalle entre les mesures (secondes)"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/intervalInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Aucun = 20 secondes (par défaut)" />
+
+    <CheckBox
+        android:id="@+id/forceGPScheckbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Forcer actualisation GPS" />
+
+</LinearLayout>

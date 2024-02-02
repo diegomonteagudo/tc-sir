@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SecondFragment">
+
+
+
+
+    <TextView
+        android:id="@+id/textviewOperator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Opérateur : "
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"/>
+
+    <TextView
+        android:id="@+id/textviewtech"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Technologie utilisée : "
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/textviewOperator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="90dp"/>
+
+
+    <Button
+        android:id="@+id/button2G"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2G"
+        app:layout_constraintTop_toBottomOf="@id/textviewtech"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"/>
+    <Button
+        android:id="@+id/button3G"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3G"
+        app:layout_constraintTop_toBottomOf="@id/button2G"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+    <Button
+        android:id="@+id/button4G"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4G"
+        app:layout_constraintTop_toBottomOf="@id/button3G"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/button_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lancer la recherche"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="20dp"
+        app:layout_constraintTop_toBottomOf="@id/button4G"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.5"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
