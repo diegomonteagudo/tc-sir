@@ -144,7 +144,7 @@ public class CellDataSaver implements Runnable {
             //Ecriture localisation, date et heure
             double latitude = 0;
             double longitude = 0;
-            double precision = -1;
+            double precision = 0;
             double altitude = -1;
             if(forceGPS) {
                 location = getGPSInfoHard();
