@@ -1,4 +1,4 @@
-package com.insatc.sir_scanner;
+package com.insatc.sir_scanner.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,12 +19,13 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 
-import com.insatc.sir_scanner.databinding.FragmentSecondBinding;
+import com.insatc.sir_scanner.R;
+import com.insatc.sir_scanner.databinding.FragmentTechChoiceBinding;
 
 
-public class SecondFragment extends Fragment {
+public class TechChoiceFragment extends Fragment {
 
-    private FragmentSecondBinding binding;
+    private FragmentTechChoiceBinding binding;
 
     private boolean isUpdating = true;
 
@@ -40,7 +41,7 @@ public class SecondFragment extends Fragment {
     ) {
 
 
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
+        binding = FragmentTechChoiceBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }

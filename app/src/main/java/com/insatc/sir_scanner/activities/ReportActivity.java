@@ -1,4 +1,4 @@
-package com.insatc.sir_scanner;
+package com.insatc.sir_scanner.activities;
 
 
 import android.app.Activity;
@@ -36,6 +36,10 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.insatc.sir_scanner.map.CustomMapView;
+import com.insatc.sir_scanner.datatools.CustomPoint;
+import com.insatc.sir_scanner.R;
+import com.insatc.sir_scanner.datatools.RecordingData;
 import com.opencsv.CSVReader;
 
 import java.io.File;
@@ -51,9 +55,9 @@ import com.opencsv.CSVWriter;
 import android.Manifest;
 import android.widget.Toast;
 
-public class MapsActivity extends AppCompatActivity {
+public class ReportActivity extends AppCompatActivity {
 
-    public String TAG = "MapsActivity";
+    public String TAG = "ReportActivity";
     private String csvPath;
 
     private ImageButton btnFullscreen;
@@ -82,7 +86,7 @@ public class MapsActivity extends AppCompatActivity {
 
         Configuration.getInstance().load(this, getPreferences(Activity.MODE_PRIVATE));
 
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_report);
 
         /*TRES IMPORTANT : l'activité doit être appelée avec un extra "Path" qui est le chemin
         complet vers le csv*/
@@ -90,7 +94,7 @@ public class MapsActivity extends AppCompatActivity {
         if (intent != null && intent.hasExtra("Path")){
             csvPath = intent.getStringExtra("Path");
         } else {
-            Log.d("MapsActivity", "ERREUR: AUCUN INTENT");
+            Log.d("ReportActivity", "ERREUR: AUCUN INTENT");
             //ancien nom de test si pas d'intent
             csvPath = getExternalFilesDir(null) +  "/Documents/csvAntenne.csv";
         }
@@ -147,7 +151,7 @@ public class MapsActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if(!Environment.isExternalStorageManager()) {
                         //tentative de faire fonctionner sous Android 13+
-                        Toast.makeText(MapsActivity.this, "Veuillez autoriser à l'application la manipulation de tous les fichiers", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ReportActivity.this, "Veuillez autoriser à l'application la manipulation de tous les fichiers", Toast.LENGTH_SHORT).show();
                         Intent intentPerm = new Intent();
                         intentPerm.setAction(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
                         startActivity(intentPerm);
@@ -162,7 +166,7 @@ public class MapsActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     if(!Environment.isExternalStorageManager()) {
                         //tentative de faire fonctionner sous Android 13+
-                        Toast.makeText(MapsActivity.this, "Veuillez autoriser à l'application la manipulation de tous les fichiers", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ReportActivity.this, "Veuillez autoriser à l'application la manipulation de tous les fichiers", Toast.LENGTH_SHORT).show();
                         Intent intentPerm = new Intent();
                         intentPerm.setAction(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
                         startActivity(intentPerm);
@@ -172,7 +176,7 @@ public class MapsActivity extends AppCompatActivity {
                 }
             });
         } catch (Exception e){
-            Log.d("MapsActivity","ERREUR chargement du csv");
+            Log.d("ReportActivity","ERREUR chargement du csv");
             e.printStackTrace();
             genInfoTextView.setText("ERREUR chargement du CSV...");
         }

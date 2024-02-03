@@ -1,4 +1,4 @@
-package com.insatc.sir_scanner;
+package com.insatc.sir_scanner.map;
 
 import android.content.Context;
 import android.os.Handler;

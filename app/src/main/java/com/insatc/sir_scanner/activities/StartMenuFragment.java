@@ -1,4 +1,4 @@
-package com.insatc.sir_scanner;
+package com.insatc.sir_scanner.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,11 +18,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.insatc.sir_scanner.databinding.FragmentFirstBinding;
+import com.insatc.sir_scanner.R;
+import com.insatc.sir_scanner.databinding.FragmentStartMenuBinding;
 
-public class FirstFragment extends Fragment {
+public class StartMenuFragment extends Fragment {
 
-    private FragmentFirstBinding binding;
+    private FragmentStartMenuBinding binding;
 
     @Override
     public View onCreateView(
@@ -30,7 +31,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        binding = FragmentStartMenuBinding.inflate(inflater, container, false);
 
 
 
@@ -44,7 +45,7 @@ public class FirstFragment extends Fragment {
         binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
+                NavHostFragment.findNavController(StartMenuFragment.this)
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
@@ -111,7 +112,7 @@ public class FirstFragment extends Fragment {
                 Toast.makeText(requireContext(), "Fichier sélectionné : " + selectedFileName, Toast.LENGTH_SHORT).show();
                 File externalDir = getContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
                 String csvFilePath = new File(externalDir, selectedFileName).getAbsolutePath();
-                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                Intent intent = new Intent(getActivity(), ReportActivity.class);
                 intent.putExtra("Path", csvFilePath);
                 startActivity(intent);            }
         });

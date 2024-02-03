@@ -1,4 +1,4 @@
-package com.insatc.sir_scanner;
+package com.insatc.sir_scanner.activities;
 
 import android.Manifest;
 import android.content.Context;
@@ -15,9 +15,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.insatc.sir_scanner.NetworkTools.CellDataSaver;
-import com.insatc.sir_scanner.NetworkTools.CellDataScanner;
-import com.insatc.sir_scanner.NetworkTools.InternetTraffic;
+import com.insatc.sir_scanner.networktools.CellDataSaver;
+import com.insatc.sir_scanner.networktools.CellDataScanner;
+import com.insatc.sir_scanner.networktools.InternetTraffic;
+import com.insatc.sir_scanner.R;
 
 import java.util.List;
 

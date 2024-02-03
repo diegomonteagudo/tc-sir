@@ -19,7 +19,7 @@
             app:layout_constraintEnd_toEndOf="@+id/mapView"
             app:srcCompat="@drawable/ic_menu_mapmode" />
 
-        <com.insatc.sir_scanner.CustomMapView
+        <com.insatc.sir_scanner.map.CustomMapView
             android:id="@+id/mapView"
             android:layout_width="300dp"
             android:layout_height="300dp"
@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        </com.insatc.sir_scanner.CustomMapView>
+        </com.insatc.sir_scanner.map.CustomMapView>
 
         <TextView
             android:id="@+id/legendTextView"

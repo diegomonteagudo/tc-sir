@@ -1,10 +1,10 @@
-package com.insatc.sir_scanner.NetworkTools;
+package com.insatc.sir_scanner.networktools;
 
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.CancellationToken;
 import com.google.android.gms.tasks.OnTokenCanceledListener;
-import com.insatc.sir_scanner.MapsActivity;
+import com.insatc.sir_scanner.activities.ReportActivity;
 
 import android.content.Intent;
 import android.location.Location;
@@ -240,7 +240,7 @@ public class CellDataSaver implements Runnable {
 
                 // Utilisation du layout inflator pour inflater le layout de la boîte de dialogue
                 LayoutInflater inflater = LayoutInflater.from(context);
-                View dialogView = inflater.inflate(R.layout.input_dialog_layout, null);
+                View dialogView = inflater.inflate(R.layout.recording_input_dialog, null);
                 builder.setView(dialogView);
 
                 // Récupération des références des vues dans le layout de la boîte de dialogue
@@ -683,7 +683,7 @@ public class CellDataSaver implements Runnable {
                     btnVisualiser.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(context, MapsActivity.class);
+                            Intent intent = new Intent(context, ReportActivity.class);
                             intent.putExtra("Path", path);
                             context.startActivity(intent);
                         }

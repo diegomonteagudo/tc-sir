@@ -1,4 +1,4 @@
-package com.insatc.sir_scanner;
+package com.insatc.sir_scanner.datatools;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -10,19 +10,19 @@ import java.util.List;
  * l'affichage des données dans l'application.
  */
 public class RecordingData {
-    String nomEnregistrement;
-    String technologieVisee;
-    String operateur;
-    String dureePrevue;
-    String debut;
-    String fin;
-    String intervalleMesure;
-    int nombreMesures;
-    int nombreCellulesServing;
-    int nombreCellulesTotal;
-    List<Integer> listeZones;
-    List<Cellule> listeCellulesServing; //cellules qui ont servi de Serving Cell au moins 1 fois
-    List<Cellule> listeCellulesVoisinnes; //cellules qui ne sont apparues qu'en tant que voisinnes
+    public String nomEnregistrement;
+    public String technologieVisee;
+    public String operateur;
+    public String dureePrevue;
+    public String debut;
+    public String fin;
+    public String intervalleMesure;
+    public int nombreMesures;
+    public int nombreCellulesServing;
+    public int nombreCellulesTotal;
+    public List<Integer> listeZones;
+    public List<Cellule> listeCellulesServing; //cellules qui ont servi de Serving Cell au moins 1 fois
+    public List<Cellule> listeCellulesVoisinnes; //cellules qui ne sont apparues qu'en tant que voisinnes
 
     public RecordingData(){
         nomEnregistrement = null;

@@ -1,4 +1,4 @@
-package com.insatc.sir_scanner;
+package com.insatc.sir_scanner.activities;
 
 import android.os.Bundle;
 
@@ -9,12 +9,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.insatc.sir_scanner.R;
 import com.insatc.sir_scanner.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
-//activité de FirstFragment et SecondFragment générée par défaut
+//activité de StartMenuFragment et TechChoiceFragment générée par défaut
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;

@@ -1,4 +1,4 @@
-package com.insatc.sir_scanner.NetworkTools;
+package com.insatc.sir_scanner.networktools;
 
 import android.Manifest;
 import android.content.Context;

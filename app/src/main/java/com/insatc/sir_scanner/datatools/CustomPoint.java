@@ -1,4 +1,4 @@
-package com.insatc.sir_scanner;
+package com.insatc.sir_scanner.datatools;
 
 import org.osmdroid.util.GeoPoint;
 
